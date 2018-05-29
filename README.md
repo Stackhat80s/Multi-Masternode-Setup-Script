@@ -80,7 +80,7 @@ After registration you get to the Dashboard. You have to do the first payment wi
 
 9.	Download and execute script on VPS: (each MN must have unique ports)
 
-		wget https://raw.githubusercontent.com/BellyUp/scripts/master/NeckBeardCryptoTips/NBCT-setup.sh
+		wget https://raw.githubusercontent.com/BellyUp/Multi-Masternode-Setup-Script/master/NBCT-setup.sh
 
 		chmod 755 NBCT-setup.sh
 
