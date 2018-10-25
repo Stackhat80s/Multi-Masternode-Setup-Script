@@ -4,7 +4,7 @@ cd ~
 echo "****************************************************************************"
 echo "* Ubuntu 14.04 is the recommended opearting system for this install.       *"
 echo "*                                                                          *"
-echo "* This script will install and configure your NeckBeardCryptoTips  masternodes.  *"
+echo "* This script will install and configure your DingoDollars masternodes.  *"
 echo "****************************************************************************"
 echo && echo && echo
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
@@ -33,9 +33,9 @@ if [[ $DOSETUP =~ "y" ]] ; then
   sudo apt-get install libgmp3-dev -y
 
 
-  git clone https://github.com/GilbertGrape/NeckBeardCryptoTips
+  git clone https://github.com/MikeP243/DingoDollars
 
-cd NeckBeardCryptoTips/
+cd DingoDollars/
 
 sudo dd if=/dev/zero of=/swapfile bs=1M count=2000
 sudo mkswap /swapfile
@@ -50,7 +50,7 @@ cd src
 
 make -f makefile.unix
 
-mv NeckBeardCryptoTipsd /usr/local/bin/
+mv DingoDollarsd /usr/local/bin/
 
 cd
 
@@ -59,7 +59,7 @@ cd
   # mkswap /var/swap.img
   # swapon /var/swap.img
 
-  # sudo mv  NeckBeardCryptoTips/bin/* /usr/bitcoin
+  # sudo mv  DingoDollars/bin/* /usr/bitcoin
 
   cd
 
@@ -108,53 +108,53 @@ for i in `seq 1 1 $MNCOUNT`; do
   read RPCPORT
 
   ALIAS=${ALIAS,,}
-  CONF_DIR=~/.NeckBeardCryptoTips_$ALIAS
+  CONF_DIR=~/.DingoDollars_$ALIAS
 
   # Create scripts
-  echo '#!/bin/bash' > ~/bin/NeckBeardCryptoTipsd_$ALIAS.sh
-  echo "NeckBeardCryptoTipsd -daemon -conf=$CONF_DIR/NeckBeardCryptoTips.conf -datadir=$CONF_DIR "'$*' >> ~/bin/NeckBeardCryptoTipsd_$ALIAS.sh
-  echo '#!/bin/bash' > ~/bin/NeckBeardCryptoTips-cli_$ALIAS.sh
-  echo "NeckBeardCryptoTips-cli -conf=$CONF_DIR/NeckBeardCryptoTips.conf -datadir=$CONF_DIR "'$*' >> ~/bin/NeckBeardCryptoTips-cli_$ALIAS.sh
-  echo '#!/bin/bash' > ~/bin/NeckBeardCryptoTips-tx_$ALIAS.sh
-  echo "NeckBeardCryptoTips-tx -conf=$CONF_DIR/NeckBeardCryptoTips.conf -datadir=$CONF_DIR "'$*' >> ~/bin/NeckBeardCryptoTips-tx_$ALIAS.sh
-  chmod 755 ~/bin/NeckBeardCryptoTips*.sh
+  echo '#!/bin/bash' > ~/bin/DingoDollarsd_$ALIAS.sh
+  echo "DingoDollarsd -daemon -conf=$CONF_DIR/DingoDollars.conf -datadir=$CONF_DIR "'$*' >> ~/bin/DingoDollarsd_$ALIAS.sh
+  echo '#!/bin/bash' > ~/bin/DingoDollars-cli_$ALIAS.sh
+  echo "DingoDollars-cli -conf=$CONF_DIR/DingoDollars.conf -datadir=$CONF_DIR "'$*' >> ~/bin/DingoDollars-cli_$ALIAS.sh
+  echo '#!/bin/bash' > ~/bin/DingoDollars-tx_$ALIAS.sh
+  echo "DingoDollars-tx -conf=$CONF_DIR/DingoDollars.conf -datadir=$CONF_DIR "'$*' >> ~/bin/DingoDollars-tx_$ALIAS.sh
+  chmod 755 ~/bin/DingoDollars*.sh
 
   mkdir -p $CONF_DIR
-  echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> NeckBeardCryptoTips.conf_TEMP
-  echo "rpcpassword=pass"`shuf -i 100000-10000000 -n 1` >> NeckBeardCryptoTips.conf_TEMP
-  echo "rpcallowip=127.0.0.1" >> NeckBeardCryptoTips.conf_TEMP
-  echo "rpcport=$RPCPORT" >> NeckBeardCryptoTips.conf_TEMP
-  echo "listen=1" >> NeckBeardCryptoTips.conf_TEMP
-  echo "server=1" >> NeckBeardCryptoTips.conf_TEMP
-  echo "daemon=1" >> NeckBeardCryptoTips.conf_TEMP
-  echo "logtimestamps=1" >> NeckBeardCryptoTips.conf_TEMP
-  echo "maxconnections=256" >> NeckBeardCryptoTips.conf_TEMP
-  echo "masternode=1" >> NeckBeardCryptoTips.conf_TEMP
-  echo "" >> NeckBeardCryptoTips.conf_TEMP
+  echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> DingoDollars.conf_TEMP
+  echo "rpcpassword=pass"`shuf -i 100000-10000000 -n 1` >> DingoDollars.conf_TEMP
+  echo "rpcallowip=127.0.0.1" >> DingoDollars.conf_TEMP
+  echo "rpcport=$RPCPORT" >> DingoDollars.conf_TEMP
+  echo "listen=1" >> DingoDollars.conf_TEMP
+  echo "server=1" >> DingoDollars.conf_TEMP
+  echo "daemon=1" >> DingoDollars.conf_TEMP
+  echo "logtimestamps=1" >> DingoDollars.conf_TEMP
+  echo "maxconnections=256" >> DingoDollars.conf_TEMP
+  echo "masternode=1" >> DingoDollars.conf_TEMP
+  echo "" >> DingoDollars.conf_TEMP
 
-  #echo "addnode=addnode=91.121.71.172" >> NeckBeardCryptoTips.conf_TEMP
-  #echo "addnode=addnode=109.124.213.194" >> NeckBeardCryptoTips.conf_TEMP
-  #echo "addnode=addnode=202.182.110.55" >> NeckBeardCryptoTips.conf_TEMP
-  #echo "addnode=addnode=217.115.98.185" >> NeckBeardCryptoTips.conf_TEMP
-  #echo "addnode=addnode=54.37.16.231" >> NeckBeardCryptoTips.conf_TEMP
-  #echo "addnode=addnode=88.99.201.58" >> NeckBeardCryptoTips.conf_TEMP
-  #echo "addnode=addnode=98.226.11.139" >> NeckBeardCryptoTips.conf_TEMP
-  #echo "addnode=addnode=35.197.125.133" >> NeckBeardCryptoTips.conf_TEMP
-  #echo "addnode=addnode=149.28.53.192" >> NeckBeardCryptoTips.conf_TEMP
-  #echo "addnode=addnode=151.224.28.188" >> NeckBeardCryptoTips.conf_TEMP
-  #echo "addnode=addnode=91.121.71.172" >> NeckBeardCryptoTips.conf_TEMP
-  #echo "addnode=addnode=95.211.224.212" >> NeckBeardCryptoTips.conf_TEMP
-  #echo "addnode=addnode=104.54.217.117" >> NeckBeardCryptoTips.conf_TEMP
-  #echo "addnode=addnode=159.65.53.106" >> NeckBeardCryptoTips.conf_TEMP
-  #echo "addnode=addnode=173.249.33.136" >> NeckBeardCryptoTips.conf_TEMP
+  #echo "addnode=addnode=91.121.71.172" >> DingoDollars.conf_TEMP
+  #echo "addnode=addnode=109.124.213.194" >> DingoDollars.conf_TEMP
+  #echo "addnode=addnode=202.182.110.55" >> DingoDollars.conf_TEMP
+  #echo "addnode=addnode=217.115.98.185" >> DingoDollars.conf_TEMP
+  #echo "addnode=addnode=54.37.16.231" >> DingoDollars.conf_TEMP
+  #echo "addnode=addnode=88.99.201.58" >> DingoDollars.conf_TEMP
+  #echo "addnode=addnode=98.226.11.139" >> DingoDollars.conf_TEMP
+  #echo "addnode=addnode=35.197.125.133" >> DingoDollars.conf_TEMP
+  #echo "addnode=addnode=149.28.53.192" >> DingoDollars.conf_TEMP
+  #echo "addnode=addnode=151.224.28.188" >> DingoDollars.conf_TEMP
+  #echo "addnode=addnode=91.121.71.172" >> DingoDollars.conf_TEMP
+  #echo "addnode=addnode=95.211.224.212" >> DingoDollars.conf_TEMP
+  #echo "addnode=addnode=104.54.217.117" >> DingoDollars.conf_TEMP
+  #echo "addnode=addnode=159.65.53.106" >> DingoDollars.conf_TEMP
+  #echo "addnode=addnode=173.249.33.136" >> DingoDollars.conf_TEMP
 
-  echo "" >> NeckBeardCryptoTips.conf_TEMP
-  echo "port=$PORT" >> NeckBeardCryptoTips.conf_TEMP
-  echo "masternodeaddress=$IP:$PORT" >> NeckBeardCryptoTips.conf_TEMP
-  echo "masternodeprivkey=$PRIVKEY" >> NeckBeardCryptoTips.conf_TEMP
+  echo "" >> DingoDollars.conf_TEMP
+  echo "port=$PORT" >> DingoDollars.conf_TEMP
+  echo "masternodeaddress=$IP:$PORT" >> DingoDollars.conf_TEMP
+  echo "masternodeprivkey=$PRIVKEY" >> DingoDollars.conf_TEMP
   sudo ufw allow $PORT/tcp
 
-  mv NeckBeardCryptoTips.conf_TEMP $CONF_DIR/NeckBeardCryptoTips.conf
+  mv DingoDollars.conf_TEMP $CONF_DIR/DingoDollars.conf
 
-  sh ~/bin/NeckBeardCryptoTipsd_$ALIAS.sh
+  sh ~/bin/DingoDollarsd_$ALIAS.sh
 done
